@@ -1,0 +1,13 @@
+.find{
+  height: 100%;
+/*  border: 1px solid gray;*/
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+/*  background-color: gray;*/
+}
+
+.find input{
+  font-size: 15px;
+}

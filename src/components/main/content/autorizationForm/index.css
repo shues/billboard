@@ -1,0 +1,23 @@
+.autorizationForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  border: 1px solid gray;
+
+}
+
+.autorizationForm input{
+  font-size: 30px;
+}
+
+.autorizationForm button{
+  font-size: 30px;
+}
+
+.buttonSet{
+  display: flex;
+  flex-direction: row;
+}

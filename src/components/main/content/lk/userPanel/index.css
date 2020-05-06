@@ -1,0 +1,21 @@
+.userPanel{
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  line-height: 30px;
+  height: 4vh;
+  min-height: 30px;
+}
+
+.userPanel span{
+  flex-grow: 1;
+  text-align: right;
+}
+
+.userPanel button{
+  background-color: lightgray;
+/*  width: 120px;*/
+  border: 0;
+  font-size: 15px;
+  border-radius: 5px;
+}

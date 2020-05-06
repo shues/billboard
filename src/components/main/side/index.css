@@ -1,0 +1,10 @@
+.side{
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-start;
+  padding-top: 10px;
+  height: 100%;
+  width: 20vw;
+  border: 1px solid gray;
+/*  background-color:brown;*/
+}

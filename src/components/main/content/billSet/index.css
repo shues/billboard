@@ -1,0 +1,8 @@
+.billSet{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-height: 75vh;
+  overflow: scroll;
+}

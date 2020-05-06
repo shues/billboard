@@ -1,0 +1,7 @@
+.category{
+/*  width: 80%;*/
+  text-align: left;
+  padding-left: 15px;
+  cursor: pointer;
+  text-decoration: underline;
+}

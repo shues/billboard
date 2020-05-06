@@ -1,0 +1,28 @@
+.registration{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 20px;
+  font-size: 20px;
+}
+
+label{
+  display: flex;
+  width: 50%;
+  flex-direction: row;
+}
+
+label input{
+  width: 50%;
+  border: 1px solid gray;
+  font-size: 20px;
+}
+
+label b{
+  flex-grow: 1;
+}
+
+.registration button{
+  width: 50%;
+  font-size: 20px;
+}

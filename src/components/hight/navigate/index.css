@@ -1,0 +1,8 @@
+.navigate{
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+  height: 100%;
+  border: 1px solid gray;
+/*  background-color: aquamarine;*/
+}
