@@ -12,6 +12,8 @@ export class Side extends React.Component{
           categories={this.props.categories}
           addCategory={this.props.addCategory}
           delCategory={this.props.delCategory}
+          setCurrentCategory = {this.props.setCurrentCategory}
+          currentCategory = {this.props.currentCategory}
         />
         <Filter />
       </div>

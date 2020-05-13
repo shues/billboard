@@ -1,0 +1,8 @@
+.newBillForm{
+  display: flex;
+  flex-direction: column;
+}
+
+lable{
+  text-align: left;
+}

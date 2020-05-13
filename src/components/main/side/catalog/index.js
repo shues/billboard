@@ -19,6 +19,8 @@ export class Catalog extends React.Component {
             delCategory={th.props.delCategory}
             categories={categories}
             mode={th.props.mode}
+            setCurrentCategory = {th.props.setCurrentCategory}
+            currentCategory = {th.props.currentCategory}
           />)
       }
     });

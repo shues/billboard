@@ -1,0 +1,9 @@
+.billsManager{
+ display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-height: 75vh;
+  overflow: scroll;
+  border: 1px solid gray;
+}
