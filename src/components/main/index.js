@@ -44,7 +44,7 @@ export default class Main extends React.Component{
     return fetch(url)
       .then(function(res){
 //        console.log(res);
-        return res.json();
+        return res.text();
       })
       .catch(function(e){
         console.log('error ' + e);
@@ -54,23 +54,19 @@ export default class Main extends React.Component{
 
   autorization(login, password){
     const url = "api/v1/autorization/login/?login=" + login + "&password=" + password;
-    const th = this;
-//    console.log(url);
-    this.makeRequest(url).then(function(res){
-      console.log(res);
-        if(res['res'] === "ok"){
-          const lk = res["data"];
-          th.setProfile(lk);
-        }
-    });
-//    const lk = {"profile":{"id":1,"name":"user"},"posts":{}};
-//    this.setProfile(lk);
-//    this.makeRequest(url).then((res)=>{
-//      console.log(res);
-//      if(res.result === "ok"){
-//        this.setProfile(res.lk);
-//      }
-//    })
+    if(this.props.prod){
+      const th = this;
+      this.makeRequest(url).then(function(res){
+        console.log(res);
+          if(res['res'] === "ok"){
+            const lk = res["data"];
+            th.setProfile(lk);
+          }
+      });
+    }else{
+      const lk = '{"profile":{"id":"1","name":"admin"},"posts":{}}';
+      this.setProfile(JSON.parse(lk));
+    }
   }
 
   logout(){
@@ -100,6 +96,7 @@ export default class Main extends React.Component{
   }
 
   setProfile(lk){
+    console.log(lk);
     const mode = (lk.profile.name === "admin")?"admin":"lk";
     this.setState({
       lk: lk,
@@ -126,34 +123,33 @@ export default class Main extends React.Component{
 //        "parent":"1",
 //      },
 //    }
-    const th = this;
-    const url = "api/v1/catalog/list/";
-//    console.log(url);
-    let categories = {};
-    this.makeRequest(url).then(function(res){
-//      console.log(res);
-      if(res['res'] === "ok"){
-        const data = res.data;
-        const keys = Object.keys(data);
-//        console.log(keys);
-        keys.forEach(function(el){
-//          let parent = (data[el].parent === null)?null:parseInt(data[el].parent);
-          let newCat = {
-            name: data[el].name,
-            parent: data[el].parent,
-          };
-          categories[data[el].id] = newCat;
-        });
-      }
-//      console.log(categories);
-      const catalog = {
-        categories: categories,
-        currentCategory: null,
-      }
-      th.setState({
-        catalog: catalog
+    if(this.props.prod){
+      const th = this;
+      const url = "api/v1/catalog/list/";
+      let categories = {};
+      this.makeRequest(url).then(function(res){
+        if(res['res'] === "ok"){
+          const data = res.data;
+          const keys = Object.keys(data);
+          keys.forEach(function(el){
+            let newCat = {
+              name: data[el].name,
+              parent: data[el].parent,
+            };
+            categories[data[el].id] = newCat;
+          });
+        }
+        const catalog = {
+          categories: categories,
+          currentCategory: null,
+        }
+        th.setState({
+          catalog: catalog
+        })
       })
-    })
+    }else{
+
+    }
   }
 
   items(){
