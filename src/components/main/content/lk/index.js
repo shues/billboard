@@ -1,6 +1,7 @@
 import React from 'react';
 import {UserPanel} from './userPanel';
 import {BillsManager} from './billsManager';
+import {Profile} from './profile';
 import './index.css';
 
 export class Lk extends React.Component{
@@ -17,11 +18,21 @@ export class Lk extends React.Component{
     })
   }
 
+  showProfile(){
+    this.setState({
+      mode: "showProfile",
+    })
+  }
+
   render(){
-    let content = <BillsManager
-                    mode = {this.state.mode}
-                    categories={this.props.categories}
-                  />
+    let content =
+        <BillsManager
+          mode = {this.state.mode}
+          categories={this.props.categories}
+        />
+    if(this.state.mode === "showProfile"){
+      content = <Profile data = {this.props.data} />
+    }
     return(
       <div>
         <UserPanel

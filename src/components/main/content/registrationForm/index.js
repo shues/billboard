@@ -37,11 +37,14 @@ export class Registration extends React.Component{
   }
 
   checkLogin(){
-    console.log(this.props);
-    const url = "api/v1/registration/checkLogin/?login=" + this.state.login;
-    return this.props.makeRequest(url).then(function(res){
-      return (res['res'] === "ok");
-    });
+    if(this.props.prod){
+      const url = "api/v1/registration/checkLogin/?login=" + this.state.login;
+      return this.props.makeRequest(url).then(function(res){
+        return (res['res'] === "ok");
+      });
+    }else{
+      return true;
+    }
   }
 
   runRegistration(){
@@ -70,13 +73,17 @@ export class Registration extends React.Component{
   }
 
   saveRegistrationData(){
-    const url = "api/v1/registration/addNewUser/?login=" + this.state.login + "&password="+this.state.password;
-    const th = this;
-    this.props.makeRequest(url).then(function(res){
-      if(res['res'] === "ok"){
-        th.props.logout();
-      }
-    });
+    if(this.props.prod){
+      const url = "api/v1/registration/addNewUser/?login=" + this.state.login + "&password="+this.state.password;
+      const th = this;
+      this.props.makeRequest(url).then(function(res){
+        if(res['res'] === "ok"){
+          th.props.logout();
+        }
+      });
+    }else{
+      this.props.logout();
+    }
   }
 
   render(){

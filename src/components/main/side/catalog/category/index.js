@@ -78,40 +78,6 @@ export class Category extends React.Component {
     const delButton = (this.props.mode === "admin")?(<button onClick = {this.delCategory}> - </button>):null;
 
     const subCategoryShow = (this.state.showSub)?subCategory:null;
-
-//    if (this.props.mode === "admin") {
-//      if (this.state.showSub) {
-//        return (
-//          <div className = "category" onClick={this.setCurrentCategory}>
-//            <button onClick = {this.switchSubCategory}>{this.state.prevent}</button>
-//            {categoryName}
-//            {addButton}
-//            {delButton}
-//            {subCategoryShow}
-//          </div>
-//        )
-//      }
-//      return (
-//        <div className = "category" onClick={this.setCurrentCategory}>
-//          <button onClick = {this.switchSubCategory}>{this.state.prevent}</button>
-//          {categoryName}
-//          {addButton}
-//          {delButton}
-//          {subCategoryShow}
-//        </div>
-//      );
-//    }
-//    if (this.state.showSub) {
-//      return (
-//        <div className = "category" onClick={this.setCurrentCategory}>
-//          <button onClick = {this.switchSubCategory}>{this.state.prevent}</button>
-//          {categoryName}
-//          {addButton}
-//          {delButton}
-//          {subCategoryShow}
-//        </div>
-//      )
-//    }
     return (
       <div className = "category" onClick={this.setCurrentCategory}>
         <button onClick = {this.switchSubCategory}>{this.state.prevent}</button>

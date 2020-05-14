@@ -24,6 +24,7 @@ export class UserPanel extends React.Component{
         <button>Мои объявления</button>
         <button onClick={this.newPost} >Новое объявление</button>
         <span>{this.props.data.profile.name}</span>
+        <button className = "settings"></button>
         <button onClick={this.logout} >Выйти</button>
       </div>
     )

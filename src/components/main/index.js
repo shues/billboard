@@ -64,7 +64,7 @@ export default class Main extends React.Component{
           }
       });
     }else{
-      const lk = '{"profile":{"id":"1","name":"admin"},"posts":{}}';
+      const lk = '{"profile":{"id":"1","name":"' + login +'"},"posts":{}}';
       this.setProfile(JSON.parse(lk));
     }
   }
@@ -105,24 +105,6 @@ export default class Main extends React.Component{
   }
 
   categories (){
-//    const categories = {
-//      "1":{
-//        "name":"Category_1",
-//        "parent":null,
-//      },
-//      "3":{
-//        "name":"Category_2",
-//        "parent":null,
-//      },
-//      "5":{
-//        "name":"Category_3",
-//        "parent":"7",
-//      },
-//      "7":{
-//        "name":"Category_4",
-//        "parent":"1",
-//      },
-//    }
     if(this.props.prod){
       const th = this;
       const url = "api/v1/catalog/list/";
@@ -148,109 +130,64 @@ export default class Main extends React.Component{
         })
       })
     }else{
-
+      const categories = JSON.parse('{"6":{"id":"6","name":"\u043a\u0430\u0442\u0430\u043b\u043e\u0433","parent":null},"7":{"id":"7","name":"\u041e\u0434\u0435\u0436\u0434\u0430","parent":"6"},"8":{"id":"8","name":"\u041a\u0443\u0440\u0442\u043a\u0438","parent":"7"}}');
+      const catalog = {
+        categories: categories,
+        currentCategory: null,
+      }
+      this.setState({
+        catalog: catalog
+      })
     }
   }
 
   items(){
-    const items = {
-      "1":{
-        image:"null",
-        category:"1",
-        name:"item_1",
-      },
-      "2":{
-        image:"null",
-        category:"1",
-        name:"item_2",
-      },
-      "3":{
-        image:"null",
-        category:"1",
-        name:"item_3",
-      },
-      "4":{
-        image:"null",
-        category:"3",
-        name:"item_4",
-      },
-      "5":{
-        image:"null",
-        category:"3",
-        name:"item_5",
-      },
-      "6":{
-        image:"null",
-        category:"5",
-        name:"item_6",
-      },
-      "7":{
-        image:"null",
-        category:"5",
-        name:"item_7",
-      },
-      "8":{
-        image:"null",
-        category:"5",
-        name:"item_8",
-      },
-      "9":{
-        image:"null",
-        category:"1",
-        name:"item_9",
-      },
-      "10":{
-        image:"null",
-        category:"7",
-        name:"item_10",
-      },
-      "11":{
-        image:"null",
-        category:"7",
-        name:"item_11",
-      },
-    }
+    const items = '{"1":{image:"null",category:"1",name:"item_1",},"2":{image:"null",category:"1",name:"item_2",},"3":{image:"null",category:"1",name:"item_3",},"4":{image:"null",category:"3",name:"item_4",},"5":{image:"null",category:"3",name:"item_5",},"6":{image:"null",category:"5",name:"item_6",},"7":{image:"null",category:"5",name:"item_7",},"8":{image:"null",category:"5",name:"item_8",},"9":{image:"null",category:"1",name:"item_9",},"10":{image:"null",category:"7",name:"item_10",},"11":{image:"null",category:"7",name:"item_11",},}';
     this.setState({
       items: items,
     })
   }
 
   addCategory(name, parent){
-    const url = "api/v1/catalog/addCategory/?name=" + name + "&parent="+parent;
-    const th = this;
-    this.makeRequest(url).then(function(res){
-      if(res['res'] === "ok"){
-        th.categories();
+    if(this.props.prod){
+      const url = "api/v1/catalog/addCategory/?name=" + name + "&parent="+parent;
+      const th = this;
+      this.makeRequest(url).then(function(res){
+        if(res['res'] === "ok"){
+          th.categories();
+        }
+      });
+    }else{
+      let catalog = this.state.catalog;
+      const newCat = {
+        name: name,
+        parent: parent,
       }
-    });
-
-//    let catalog = this.state.catalog;
-//    const newCat = {
-//      name: name,
-//      parent: parent,
-//    }
-//    let keys = Object.keys(catalog.categories);
-//    let newId = parseInt(keys[keys.length-1]) + 1;
-//    catalog.categories[newId] = newCat;
-//    this.setState({
-//      catalog: catalog,
-//    })
+      let keys = Object.keys(catalog.categories);
+      let newId = parseInt(keys[keys.length-1]) + 1;
+      catalog.categories[newId] = newCat;
+      this.setState({
+        catalog: catalog,
+      })
+    }
   }
 
   delCategory(id){
-    const url = "api/v1/catalog/delCategory/?id=" + id;
-    const th = this;
-    this.makeRequest(url).then(function(res){
-      if(res['res'] === "ok"){
-        th.categories();
-      }
-    });
-
-//    let catalog = this.state.catalog;
-//    delete catalog.categories[id];
-//    this.setState({
-//      catalog: catalog,
-//    })
+    if(this.props.prod){
+      const url = "api/v1/catalog/delCategory/?id=" + id;
+      const th = this;
+      this.makeRequest(url).then(function(res){
+        if(res['res'] === "ok"){
+          th.categories();
+        }
+      });
+    }else{
+      let catalog = this.state.catalog;
+      delete catalog.categories[id];
+      this.setState({
+        catalog: catalog,
+      })
+    }
   }
 
   setCurrentCategory(id){
@@ -272,6 +209,7 @@ export default class Main extends React.Component{
           addCategory = {this.addCategory}
           delCategory = {this.delCategory}
           setCurrentCategory = {this.setCurrentCategory}
+          prod = {this.props.prod}
         />
         <Content
           mode={this.state.mode}
@@ -283,6 +221,7 @@ export default class Main extends React.Component{
           logout = {this.logout}
           startRegistration = {this.startRegistration}
           makeRequest = {this.makeRequest}
+          prod = {this.props.prod}
         />
       </div>
     );
